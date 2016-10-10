@@ -54,9 +54,11 @@ abstract class AbstractCrudController extends Controller implements CrudControll
         $type = $definition->getForm()->getCreateForm();
         $type = $this->get('bravesheep_crudify.resolver.form')->resolve($type);
 
+        $form = new $type();
+
         $resolver = $this->get('bravesheep_crudify.resolver.form_options');
         $options = $resolver->resolve($definition->getForm(), FormOptionsResolver::TYPE_CREATE, $this);
-        return $this->createForm($type, null, $options);
+        return $this->createForm($form, null, $options);
     }
 
     /**
@@ -70,9 +72,11 @@ abstract class AbstractCrudController extends Controller implements CrudControll
         $type = $definition->getForm()->getUpdateForm();
         $type = $this->get('bravesheep_crudify.resolver.form')->resolve($type);
 
+        $form = new $type();
+
         $resolver = $this->get('bravesheep_crudify.resolver.form_options');
         $options = $resolver->resolve($definition->getForm(), FormOptionsResolver::TYPE_UPDATE, $this, $object);
-        return $this->createForm($type, $object, $options);
+        return $this->createForm($form, $object, $options);
     }
 
     /**
