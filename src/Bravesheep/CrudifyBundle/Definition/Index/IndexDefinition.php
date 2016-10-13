@@ -203,7 +203,7 @@ class IndexDefinition implements IndexDefinitionInterface
     public function getColumnWithField($field)
     {
         /** @var ColumnInterface $column */
-        foreach ($this as $column) {
+        foreach ($this->columns as $column) {
             if ($column->getField() === $field) {
                 return $column;
             }
