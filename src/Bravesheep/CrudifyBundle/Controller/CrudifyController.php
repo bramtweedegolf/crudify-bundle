@@ -75,6 +75,7 @@ class CrudifyController implements ContainerAwareInterface
         $request->attributes->set('definition', $definition);
         $this->isGranted('CRUDIFY_INDEX', $definition);
         $controller = $this->getController($definition);
+
         return $controller->indexAction($definition, $request);
     }
 
@@ -89,6 +90,7 @@ class CrudifyController implements ContainerAwareInterface
         $request->attributes->set('definition', $definition);
         $this->isGranted('CRUDIFY_CREATE', $definition);
         $controller = $this->getController($definition);
+
         return $controller->newAction($definition, $request);
     }
 
@@ -103,6 +105,7 @@ class CrudifyController implements ContainerAwareInterface
         $request->attributes->set('definition', $definition);
         $this->isGranted('CRUDIFY_CREATE', $definition);
         $controller = $this->getController($definition);
+
         return $controller->createAction($definition, $request);
     }
 
@@ -118,6 +121,7 @@ class CrudifyController implements ContainerAwareInterface
         $request->attributes->set('definition', $definition);
         $this->isGranted('CRUDIFY_UPDATE', $definition);
         $controller = $this->getController($definition);
+
         return $controller->editAction($definition, $request, (int) $id);
     }
 
@@ -133,6 +137,7 @@ class CrudifyController implements ContainerAwareInterface
         $request->attributes->set('definition', $definition);
         $this->isGranted('CRUDIFY_UPDATE', $definition);
         $controller = $this->getController($definition);
+
         return $controller->updateAction($definition, $request, (int) $id);
     }
 

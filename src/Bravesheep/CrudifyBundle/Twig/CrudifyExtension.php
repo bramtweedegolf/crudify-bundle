@@ -58,11 +58,12 @@ class CrudifyExtension extends \Twig_Extension
         return [
             'crudify_value' => new \Twig_SimpleFunction(
                 'crudify_value',
-                [$this, 'renderBlock'],
+                [$this, 'crudifyValue']/*,
                 [
                     'node_class' => 'Bravesheep\CrudifyBundle\Twig\Node\RenderCrudifyFieldNode',
                     'is_safe' => ['html']
                 ]
+                */
             ),
             new \Twig_SimpleFunction('crudify_action', [$this, 'getLinkForAction']),
             new \Twig_SimpleFunction('crudify_delete_form', [$this, 'createDeleteForm']),
@@ -75,6 +76,12 @@ class CrudifyExtension extends \Twig_Extension
     {
         $controller = $this->controllerResolver->resolve($definition->getController());
         return $controller->createDeleteForm($definition, $object)->createView();
+    }
+
+    public function crudifyValue($column, $object)
+    {
+        $getter = 'get' . ucfirst($column->getPath());
+        return $object->$getter();
     }
 
     public function renderBlock(\Twig_Template $template, ColumnInterface $column, $object, $context, $blocks)
